@@ -1,5 +1,5 @@
 <h1 align="center">
-  📱 mobile-aqui_na_feira
+  📱 App-aqui_na_feira
 </h1>
 
 <p align="center">
