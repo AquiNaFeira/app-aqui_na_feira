@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "cover",
-      "backgroundColor": "#BB3B0E"
+      "backgroundColor": "#285D35"
     },
     "ios": {
       "supportsTablet": true,
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#BB3B0E"
+        "backgroundColor": "#285D35"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.anonymous.mobile"

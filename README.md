@@ -14,7 +14,7 @@
 
 ---
 
-## 🚀 Sobre o Projeto
+## 🚀 Sobre o Projeto!
 
 O **Aqui na Feira** é um aplicativo desenvolvido com foco na valorização das feiras livres, especialmente inspirado na tradicional Feira de Caruaru. Ele conecta feirantes e consumidores, oferecendo informações sobre localização de barracas, produtos disponíveis, eventos e muito mais.
 
