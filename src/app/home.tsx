@@ -109,6 +109,9 @@ export default function Home() {
         ref={bottomSheetRef}
         banco={BancoSelecionado}
         loading={LoadingBanco}
+        onPressMostrarRota={() => {
+        console.log("Mostrar rota!")
+        }} 
       />
     </>
   );

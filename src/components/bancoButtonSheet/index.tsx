@@ -4,13 +4,13 @@ import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { MapPinHouse, Clock, Star } from "lucide-react-native";
 
 import { Loading } from "../loading";
-import BancoHeader from "./BancoHeader";
-import BancoTags from "./BancoTags";
-import BancoButtons from "./BancoButtons";
+import BancoHeader from "./bancoHeader";
+import BancoTags from "./bancoTags";
+import BancoButtons from "./bancoButtons";
 
 import { s } from "./style";
 import { colors } from "@/styles/theme";
-import BancoAvaliacoes from "./BancoAvaliacoes";
+import BancoAvaliacoes from "./bancoAvaliacoes";
 
 export type BancoInfo = {
   nomeMarca: string,
