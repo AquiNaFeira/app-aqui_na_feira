@@ -102,7 +102,7 @@ const BancoBottomSheet = forwardRef<BancoBottomSheetHandle, BancoBottomSheetProp
               )
             }
 
-            <BancoButtons onPressMostrarRota={onPressMostrarRota || (() => { })} />
+            <BancoButtons onPressMostrarRota={onPressMostrarRota} />
 
           </BottomSheetScrollView>
         )

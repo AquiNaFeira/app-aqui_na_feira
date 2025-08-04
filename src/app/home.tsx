@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import * as Location from "expo-location";
 
 import { api } from "@/services/api";
-import BancoBottomSheet, { BancoInfo, BancoBottomSheetHandle } from "@/components/bancoButtonSheet";
+import BancoBottomSheet, { BancoInfo, BancoBottomSheetHandle } from "@/components/bancoBottomSheet"
 
 const currentLocation = {
   latitude: -8.289224121831664,

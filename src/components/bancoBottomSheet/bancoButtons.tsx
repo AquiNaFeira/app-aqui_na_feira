@@ -6,13 +6,17 @@ import { colors } from "@/styles/theme";
 import { Ionicons } from "@expo/vector-icons"
 import Button from "../button";
 
-export default function BancoButtons(){
+type Props = { 
+    onPressMostrarRota: () => void;
+}
+
+export default function BancoButtons({ onPressMostrarRota }: Props) {
     return(
         <View style={s.buttonContainer}>
             <Button icon={<Facebook size={24} color={colors.white.base}/>} circle/>
             <Button icon={<Instagram size={24} color={colors.white.base}/>} circle/>
             <Button icon={<Ionicons name="logo-whatsapp" size={24} color={colors.white.base}/>} circle/>
-            <Button title="Mostrar Rota" icon={<Navigation size={24} color={colors.white.base}/>}/>
+            <Button title="Mostrar Rota" icon={<Navigation size={24} color={colors.white.base}/>} onPress={onPressMostrarRota}/>
         </View>
     )
 }
