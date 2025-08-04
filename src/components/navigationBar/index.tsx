@@ -33,7 +33,7 @@ export default function NavigationBar() {
             <View style={s.tab}>
               {focused ? (
                 <LinearGradient
-                  colors={['#ff9966', '#ff5e62']}
+                  colors={['#4EAF57', '#285D35']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={s.iconFocusedContainer}
@@ -42,7 +42,7 @@ export default function NavigationBar() {
                 </LinearGradient>
               ) : (
                 <View style={s.iconContainer}>
-                  <HomeIcon size={24} color={colors.terracota.base}/>
+                  <HomeIcon size={24} color={colors.green.base}/>
                 </View>
               )}
               <Text style={[s.label, focused && s.focusedLabel]}>Home</Text>
@@ -59,7 +59,7 @@ export default function NavigationBar() {
             <View style={s.tab}>
               {focused ? (
                 <LinearGradient
-                  colors={['#ff9966', '#ff5e62']}
+                  colors={['#4EAF57', '#285D35']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={s.iconFocusedContainer}
@@ -68,7 +68,7 @@ export default function NavigationBar() {
                 </LinearGradient>
               ) : (
                 <View style={s.iconContainer}>
-                  <Heart size={24} color={colors.terracota.base}/>
+                  <Heart size={24} color={colors.green.base}/>
                 </View>
               )}
               <Text style={[s.label, focused && s.focusedLabel]}>Favoritos</Text>
@@ -85,8 +85,7 @@ export default function NavigationBar() {
             <View style={s.tab}>
               {focused ? (
                 <LinearGradient
-                  colors={['#ff9966', '#ff5e62']}
-                  start={{ x: 0, y: 0 }}
+                  colors={['#4EAF57', '#285D35']}
                   end={{ x: 1, y: 1 }}
                   style={s.iconFocusedContainer}
                 >
@@ -94,7 +93,7 @@ export default function NavigationBar() {
                 </LinearGradient>
               ) : (
                 <View style={s.iconContainer}>
-                  <Bell size={24} color={colors.terracota.base}/>
+                  <Bell size={24} color={colors.green.base}/>
                 </View>
               )}
               <Text style={[s.label, focused && s.focusedLabel]}>Notificação</Text>
@@ -111,7 +110,7 @@ export default function NavigationBar() {
             <View style={s.tab}>
               {focused ? (
                 <LinearGradient
-                  colors={['#ff9966', '#ff5e62']}
+                  colors={['#4EAF57', '#285D35']}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 1 }}
                   style={s.iconFocusedContainer}
@@ -120,7 +119,7 @@ export default function NavigationBar() {
                 </LinearGradient>
               ) : (
                 <View style={s.iconContainer}>
-                  <User size={24} color={colors.terracota.base}/>
+                  <User size={24} color={colors.green.base}/>
                 </View>
               )}
               <Text style={[s.label, focused && s.focusedLabel]}>Perfil</Text>

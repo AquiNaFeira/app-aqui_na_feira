@@ -29,8 +29,8 @@ export default function BancoAvaliacoes({avaliacoes}: Props){
                                     <Star
                                     key={i}
                                     size={20}
-                                    color={colors.terracota.base}
-                                    fill={i <= avaliacoes.nota ? colors.terracota.base : "transparent" }
+                                    color={colors.green.base}
+                                    fill={i <= avaliacoes.nota ? colors.green.base : "transparent" }
                                     />
                                 ))
                             }

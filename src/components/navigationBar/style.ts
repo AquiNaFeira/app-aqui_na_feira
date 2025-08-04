@@ -52,7 +52,7 @@ export const s = StyleSheet.create({
         maxWidth: 80
     },
     focusedLabel: {
-        color: colors.terracota.base,
+        color: colors.green.base,
 
     }
 })

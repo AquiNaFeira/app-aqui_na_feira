@@ -1,11 +1,9 @@
-export const colors = {
-  terracota: {
-    base: "#BB3B0E",
-    light: "#C8623E",
-  },
+import { green } from "react-native-reanimated/lib/typescript/Colors";
 
-  yellow: {
-    base: "#E2AC28"
+export const colors = {
+  green: {
+    base: "#285D35",
+    light: "#4EAF57",
   },
 
   black: {

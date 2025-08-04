@@ -7,10 +7,10 @@ import { Loading } from "../loading";
 import BancoHeader from "./bancoHeader";
 import BancoTags from "./bancoTags";
 import BancoButtons from "./bancoButtons";
+import BancoAvaliacoes from "./bancoAvaliacoes";
 
 import { s } from "./style";
 import { colors } from "@/styles/theme";
-import BancoAvaliacoes from "./bancoAvaliacoes";
 
 export type BancoInfo = {
   nomeMarca: string,
@@ -42,13 +42,14 @@ export type BancoBottomSheetHandle = {
   close: () => void;
 };
 
-type Props = {
-  banco: BancoInfo | null,
-  loading: boolean,
-  onPressMostrarRota: () => void
+export type BancoBottomSheetProps = {
+  banco: BancoInfo | null;
+  loading: boolean;
+  onPressMostrarRota: () => void;
 };
 
-const BancoBottomSheet = forwardRef<BancoBottomSheetHandle, Props>(({ banco, loading, onPressMostrarRota }, ref) => {
+const BancoBottomSheet = forwardRef<BancoBottomSheetHandle, BancoBottomSheetProps>(
+  ({ banco, loading, onPressMostrarRota }, ref) => {
 
   const snapPoints = useMemo(() => ["50%", "75%"], []);
   const bottomSheetRef = useRef<BottomSheetModal>(null);
@@ -59,55 +60,54 @@ const BancoBottomSheet = forwardRef<BancoBottomSheetHandle, Props>(({ banco, loa
   }));
 
   return (
-      <BottomSheetModal 
-      ref={bottomSheetRef} 
-      snapPoints={snapPoints} 
+    <BottomSheetModal
+      ref={bottomSheetRef}
+      snapPoints={snapPoints}
       index={1}
       enablePanDownToClose={true}
-      >
-        {
-          loading ? (<Loading/>) : (
-            <BottomSheetScrollView contentContainerStyle={s.container}>
-              <BancoHeader foto={banco?.foto || null}/>
+    >
+      {
+        loading ? (<Loading />) : (
+          <BottomSheetScrollView contentContainerStyle={s.container} keyboardShouldPersistTaps="handled">
+            <BancoHeader foto={banco?.foto || null} />
+            <BancoTags tipoProdutos={banco?.tipoProdutos || []} />
 
-              <BancoTags tipoProdutos={banco?.tipoProdutos || []}/>
-
-              <View style={s.containerTitleRating}>
-                <Text style={s.title}>{banco?.nomeMarca}</Text>
-                <View style={s.ratingContainer}>
-                  <Star size={16} color={colors.terracota.base} fill={colors.terracota.base}/>
-                  <Text style={s.ratingText}>{banco?.mediaNotas}</Text>
-                </View>
+            <View style={s.containerTitleRating}>
+              <Text style={s.title}>{banco?.nomeMarca}</Text>
+              <View style={s.ratingContainer}>
+                <Star size={16} color={colors.green.base} fill={colors.green.base} />
+                <Text style={s.ratingText}>{banco?.mediaNotas}</Text>
               </View>
+            </View>
 
 
-              <Text style={s.description}>{banco?.descricao}</Text>
-              
-              <View style={s.rowInfo}>
-                <View style={s.InfoItem}>
-                  <MapPinHouse color={colors.terracota.base} size={24} />
-                  <Text style={s.infoText}>
-                    {banco?.endereco.rua}, {banco?.endereco.setor}, Nº {banco?.endereco.numero} 
-                  </Text>
-                </View>
-                <View style={s.InfoItem}>
-                  <Clock color={colors.terracota.base} size={24}/>
-                  <Text style={s.infoText}>{banco?.horario}</Text>
-                </View>
+            <Text style={s.description}>{banco?.descricao}</Text>
+
+            <View style={s.rowInfo}>
+              <View style={s.InfoItem}>
+                <MapPinHouse color={colors.green.base} size={24} />
+                <Text style={s.infoText}>
+                  {banco?.endereco.rua}, {banco?.endereco.setor}, Nº {banco?.endereco.numero}
+                </Text>
               </View>
+              <View style={s.InfoItem}>
+                <Clock color={colors.green.base} size={24} />
+                <Text style={s.infoText}>{banco?.horario}</Text>
+              </View>
+            </View>
 
-              {
-                banco?.avaliacoes && banco.avaliacoes.length > 0 && (
-                  <BancoAvaliacoes avaliacoes={banco.avaliacoes}/>
-                )
-              }
+            {
+              banco?.avaliacoes && banco.avaliacoes.length > 0 && (
+                <BancoAvaliacoes avaliacoes={banco.avaliacoes} />
+              )
+            }
 
-              <BancoButtons onPressMostrarRota={onPressMostrarRota}/>
+            <BancoButtons onPressMostrarRota={onPressMostrarRota || (() => { })} />
 
-        </BottomSheetScrollView>
-          )
-        }
-      </BottomSheetModal>
+          </BottomSheetScrollView>
+        )
+      }
+    </BottomSheetModal>
   );
 });
 

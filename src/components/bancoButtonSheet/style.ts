@@ -32,14 +32,14 @@ export const s = StyleSheet.create({
         gap: 4,
     },
     tagStyle: {
-        backgroundColor: 'rgba(187, 59, 14, 0.2)',
+        backgroundColor: '#285D35',
         paddingVertical: 6,
         paddingHorizontal: 12,
         borderRadius: 20,
     },
     tagText:{
         fontSize: 12,
-        color: colors.terracota.base,
+        color: colors.green.base,
         fontFamily: fontFamily.semiBold
     },
     rowInfo:{
@@ -71,7 +71,7 @@ export const s = StyleSheet.create({
         alignItems: "center",
         borderRadius: 24,
         gap: 4,
-        backgroundColor: 'rgba(187, 59, 14, 0.2)'
+        backgroundColor: '#285D35'
     },
     ratingText: {
         fontSize: 12,
@@ -88,7 +88,7 @@ export const s = StyleSheet.create({
         gap: 8
     },
     comment: {
-        backgroundColor: "rgba(187, 60, 14, 0.11)",
+        backgroundColor: "#285D35",
         padding: 16,
         borderRadius: 24,
         gap: 4
