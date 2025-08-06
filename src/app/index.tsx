@@ -13,10 +13,8 @@ export default function Index(){
         >
             <Welcome />
             <Logo/>
-            <Steps />
-        <Button onPress={() => router.navigate("/home")}>
-             <Button.Title>Começar</Button.Title>
-      </Button>
+            
+            <Button onPress={() => router.navigate("/home")} title="Começar" />
         </View>
     )
 } 
