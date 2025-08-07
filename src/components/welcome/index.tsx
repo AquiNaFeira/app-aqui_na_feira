@@ -9,12 +9,6 @@ import { s } from "./style"
 
 const { height } = Dimensions.get("window");
 
-type RootStackParamList = {
-  Welcome: undefined;
-  Login: undefined;
-  Register: undefined;
-};
-
 type WelcomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Welcome'>;
 
 export default function Welcome() {
