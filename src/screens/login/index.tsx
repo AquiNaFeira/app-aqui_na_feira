@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 export default function Login(){
     return(
         <View style={{flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <Text style={{fontSize: 32, fontFamily: fontFamily.bold, color: colors.green.base}}>Login</Text>
+            <Text style={{fontSize: 32, fontFamily: fontFamily.bold, color: colors.green.base}}>Entrar</Text>
         </View>
     )
 }

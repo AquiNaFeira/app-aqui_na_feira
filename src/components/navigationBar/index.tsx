@@ -7,7 +7,7 @@ import { colors } from "@/styles/theme";
 
 import Home from "@/screens/home";
 import Perfil from "@/screens/perfil";
-import Favoritos from "@/screens/favorites";
+import Favoritos from "@/screens/favorites/index";
 import Notificacao from "@/screens/notifications";
 
 const Tabs = createBottomTabNavigator();
