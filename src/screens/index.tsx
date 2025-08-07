@@ -1,6 +1,6 @@
 import Button from "@/components/button"
 import Logo from "@/components/logo"
-import { Welcome } from "@/components/welcome"
+import  Welcome  from "@/components/welcome"
 import { Steps } from "@/components/step";
 import { View } from "react-native"
 import { router } from "expo-router"
