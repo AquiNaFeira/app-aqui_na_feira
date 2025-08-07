@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigatorProps } from '@react-navigation/stack';
+import { RootStackParamList } from "@/types/navigation";
 
 import { s } from "./style"
 
@@ -23,7 +24,7 @@ export default function Welcome() {
         feirantes, bancos e toda variedade {"\n"}
         que a feira oferece!
       </Text>
-      
+
       <button
       title="Entrar"
       onPress={() => navigator.navigate("/login")}
