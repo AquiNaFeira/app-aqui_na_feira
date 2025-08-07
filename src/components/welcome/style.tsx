@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native"
 import { colors, fontFamily } from "@/styles/theme"
 
-const styles = StyleSheet.create({
+export const s = StyleSheet.create({
   fullScreen: {
     flex: 1,
     backgroundColor: '#285d35', 
