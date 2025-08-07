@@ -16,6 +16,14 @@ export function Welcome() {
         feirantes, bancos e toda variedade {"\n"}
         que a feira oferece!
       </Text>
+      <button
+      title="Entrar"
+      onPress={() => navigator.navigate("/login")}
+      />
+      <button
+      title="Criar Conta"
+      onPress={() => navigator.navigate("/register")}
+      />
     </View>
   )
 }

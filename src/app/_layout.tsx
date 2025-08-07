@@ -30,12 +30,7 @@ export default function Layout(){
     return (
         <GestureHandlerRootView style={{flex: 1}} >
         <BottomSheetModalProvider>
-        <Stack 
-            screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: colors.green.base},
-            }} 
-        />
+        <Stack/>
         <NavigationBar />
         </BottomSheetModalProvider>
         </GestureHandlerRootView>

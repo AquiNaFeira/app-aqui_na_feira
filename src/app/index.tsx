@@ -14,7 +14,9 @@ export default function Index(){
             <Welcome />
             <Logo/>
             
-            <Button onPress={() => router.navigate("/home")} title="Começar" />
+            <Button 
+                onPress={() => router.navigate("/home")} title="Começar" 
+            />
         </View>
     )
 } 
