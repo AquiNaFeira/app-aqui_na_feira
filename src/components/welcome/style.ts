@@ -4,7 +4,7 @@ import { colors, fontFamily } from "@/styles/theme"
 export const s = StyleSheet.create({
   fullScreen: {
     flex: 1,
-    backgroundColor: '#285d35', 
+    backgroundColor: colors.green.base,
   },
   topSection: {
     flex: 1.5,
@@ -14,21 +14,21 @@ export const s = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    marginBottom: 10,
+    marginBottom: 4,
   },
   logoTitle: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 5,
+    color: colors.white.base,
+    marginBottom: 4,
   },
   logoSubtitle: {
-    fontSize: 16,
-    color: '#fff',
+    fontSize: 15,
+    color: colors.white.base,
   },
   bottomCard: {
     flex: 2,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white.base,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 25,
@@ -36,24 +36,26 @@ export const s = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textContainer: {
-    flex: 1,
+    flex: 1
   },
   welcomeTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 30,
+    fontFamily: fontFamily.bold,
+    color: colors.black.base,
     marginBottom: 15,
   },
   welcomeText: {
     fontSize: 16,
-    color: '#666',
-    marginBottom: 10,
+    fontFamily: fontFamily.semiBold,
+    color: colors.black.base,
+    marginTop: 30,
+    marginBottom: 30,
     lineHeight: 24,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 40,
+    marginBottom: 65,
   },
   button: {
     flex: 1,
@@ -63,16 +65,16 @@ export const s = StyleSheet.create({
     marginHorizontal: 5,
   },
   loginButton: {
-    backgroundColor: '#285d35',
+    backgroundColor: colors.green.base,
   },
   registerButton: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: colors.white.base,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: colors.black.base,
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: '#fff',
+    fontFamily: fontFamily.semiBold,
+    color: colors.white.base,
   },
 });
