@@ -3,15 +3,14 @@ import { colors, fontFamily } from "@/styles/theme";
 
 export const s = StyleSheet.create({
     container: {
-        width: "auto",
         height: 56,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: colors.green.base,
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        borderRadius: 32,
+        paddingHorizontal: 20,
+        paddingVertical: 15,
+        borderRadius: 10,
         gap: 12,
         elevation: 3,
         shadowColor: colors.green.light,
@@ -20,7 +19,7 @@ export const s = StyleSheet.create({
         shadowRadius: 6,
     },
     title: {
-        fontFamily:fontFamily.semiBold,
+        fontFamily: fontFamily.semiBold,
         fontSize: 16,
         color: colors.white.base
     },

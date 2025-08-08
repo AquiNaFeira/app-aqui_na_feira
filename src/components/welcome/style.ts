@@ -49,7 +49,6 @@ export const s = StyleSheet.create({
     fontFamily: fontFamily.semiBold,
     color: colors.black.base,
     marginTop: 30,
-    marginBottom: 30,
     lineHeight: 24,
   },
   buttonContainer: {
@@ -59,22 +58,11 @@ export const s = StyleSheet.create({
   },
   button: {
     flex: 1,
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: 'center',
     marginHorizontal: 5,
-  },
-  loginButton: {
-    backgroundColor: colors.green.base,
   },
   registerButton: {
     backgroundColor: colors.white.base,
     borderWidth: 1,
     borderColor: colors.black.base,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontFamily: fontFamily.semiBold,
-    color: colors.white.base,
-  },
+  }
 });
