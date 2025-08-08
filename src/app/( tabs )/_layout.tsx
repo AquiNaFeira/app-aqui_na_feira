@@ -1,4 +1,4 @@
-import { s } from "./style";
+import { s } from "@/components/navigationBar/style";
 import { Home as HomeIcon, Heart, Bell, User } from "lucide-react-native"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text } from "react-native";

@@ -1,8 +1,7 @@
 import { Stack } from "expo-router"
-import { colors } from "@/styles/theme"
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import NavigationBar from '../components/navigationBar';
+
 
 
 import {
@@ -29,10 +28,11 @@ export default function Layout(){
 
     return (
         <GestureHandlerRootView style={{flex: 1}} >
-        <BottomSheetModalProvider>
-        <Stack/>
-        <NavigationBar />
-        </BottomSheetModalProvider>
+            <BottomSheetModalProvider>
+                <Stack>
+                    <Stack.Screen name="( tabs )" options={{ headerShown: false }} />
+                </Stack>
+            </BottomSheetModalProvider>
         </GestureHandlerRootView>
-    )
+    );
 }
