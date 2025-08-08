@@ -4,10 +4,8 @@ import AppRoutes from './routes/app.routes';
 
 function App() {
   return (
-    <NavigationContainer>
       <AppRoutes />
-    </NavigationContainer>
-  );
+    );
 }
 
 export default App;
