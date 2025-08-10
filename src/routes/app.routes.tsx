@@ -2,8 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Welcome from "@/components/welcome";
-import Login from "@/app/login";
-import Register from "@/app/register";
+import Login from "@/app/auth/login";
+import Register from "@/app/auth/register";
 import NavigationBar from "@/app/( tabs )/_layout";
 
 const Stack = createNativeStackNavigator();

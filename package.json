@@ -16,6 +16,7 @@
     "@expo-google-fonts/lexend": "^0.3.0",
     "@expo/vector-icons": "^14.1.0",
     "@gorhom/bottom-sheet": "^5.1.6",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-navigation/native": "^7.1.6",
     "@react-navigation/stack": "^7.4.5",
     "@tabler/icons-react-native": "^3.34.1",
