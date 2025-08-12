@@ -6,6 +6,7 @@ import { useRouter } from 'expo-router';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react-native';
 
 const primaryColor = "#285D35";
+const router = useRouter();
 
 const Login = () => {
   const navigation = useRouter();

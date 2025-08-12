@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { useSegments, useRouter } from "expo-router";
-
-import { authService } from "@/services/authService"; 
+import { authService } from "@/services/authService";
 
 type User = {
   id: string;
@@ -22,23 +21,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
   const segments = useSegments();
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
     setLoading(true);
-    console.log("Tocando a campainha...");
-    
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
-    
-    const fakeToken = "abc-123-def-456";
-    const fakeUser = { id: "user-123", email: email };
-    
-    setUser(fakeUser);
-    setToken(fakeToken);
-    
-    setLoading(false);
-  };
+    try {
+          const { user, token } = await authService.login({ email, password });
+            setUser(user);
+            setToken(token);
+        } catch (error: any) {
+            console.error("Erro no login:", error);
+            throw new Error("Credenciais inválidas ou erro de conexão.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
   const logout = async () => {
     setLoading(true);
