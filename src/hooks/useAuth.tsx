@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { useSegments, useRouter } from "expo-router";
-import { s } from "@/components/bancoBottomSheet/style";
+import { authService } from "@/services/authService";
 
 type User = {
   id: string;
@@ -21,58 +21,68 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  
   const segments = useSegments();
   const router = useRouter();
 
   const login = async (email: string, password: string) => {
     setLoading(true);
-    console.log("Tocando a campainha...");
-    
-    await new Promise(resolve => setTimeout(resolve, 1500)); 
-    
-    const fakeToken = "abc-123-def-456";
-    const fakeUser = { id: "user-123", email: email };
-    
-    setUser(fakeUser);
-    setToken(fakeToken);
-    
-    setLoading(false);
-  };
+    try {
+          const { user, token } = await authService.login({ email, password });
+            setUser(user);
+            setToken(token);
+        } catch (error: any) {
+            console.error("Erro no login:", error);
+            throw new Error("Credenciais inválidas ou erro de conexão.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
   const logout = async () => {
     setLoading(true);
-    console.log("Saindo...");
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    setUser(null);
-    setToken(null);
-    setLoading(false);
-  };
+    try {
+        await authService.logout();
+        setUser(null);
+        setToken(null);
+    } catch (error) {
+        console.error("Erro no logout:", error);
+    } finally {
+        setLoading(false);
+    }
+};
 
   useEffect(() => {
     if (!loading) {
       const isSignedIn = !!user;
-      const isAuthRoute = segments[0] === "( auth )";
+      const isAuthRoute = segments[0] === "(auth)";
 
       if (isSignedIn && isAuthRoute) {
-        router.replace("/( tabs )/home");
+        router.replace("/(tabs)/home");
       } else if (!isSignedIn && !isAuthRoute) {
-        router.replace("/( auth )/login");
+        router.replace("/(auth)/login");
       }
     }
   } , [loading, user, segments]);
 
-  useEffect (() => {
+  useEffect(() => {
     const checkInitialAuth = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const storedUser = await authService.getStoredUser();
+            const storedToken = await authService.getStoredToken();
 
-      setUser(null);
-      setToken(null);
-      setLoading(false);
+            if (storedUser && storedToken) {
+                setUser(storedUser);
+                setToken(storedToken);
+            }
+        } catch (error) {
+            console.error("Erro ao verificar autenticação inicial:", error);
+        } finally {
+            setLoading(false);
+        }
     };
     checkInitialAuth();
-  }, []);
+}, []);
 
   return (
     <AuthContext.Provider value={{ user, token, loading, login, logout }}>

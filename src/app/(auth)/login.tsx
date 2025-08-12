@@ -1,29 +1,28 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, Pressable, ScrollView, TouchableOpacity, Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import { View, Text, TextInput, Pressable, ScrollView, StyleSheet, StatusBar } from 'react-native';
+import { Alert } from 'react-native';
+import { useAuth } from '@/hooks/useAuth';
+import { useRouter } from 'expo-router';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react-native';
 
-type RootStackParamList = {
-  Login: undefined;
-  Register: undefined;
-  Home: undefined; 
-};
-
-type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
-
-const primaryColor = "#285D35"; 
+const primaryColor = "#285D35";
+const router = useRouter();
 
 const Login = () => {
-  const navigation = useNavigation<LoginScreenNavigationProp>();
+  const navigation = useRouter();
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  
+  const { login, loading } = useAuth(); 
 
-  const handleLogin = () => {
-    Alert.alert("Login", `E-mail: ${email}\nSenha: ${password}`);
+  const handleLogin = async () => {
+    try {
+      await login(email, password);
+    } catch (error: any) {
+      Alert.alert("Erro no Login", error.message || "Ocorreu um erro ao tentar fazer login. Verifique suas credenciais.");
+    }
   };
 
   return (
@@ -31,9 +30,9 @@ const Login = () => {
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
       
       <View style={s.header}>
-        <Pressable onPress={() => navigation.goBack()} style={s.backButton}>
-          <ArrowLeft size={24} color="#333" />
-        </Pressable>
+      <Pressable onPress={() => router.back()} style={s.backButton}>
+        <ArrowLeft size={24} color="#333" />
+      </Pressable>
         <Text style={s.headerTitle}>Entrar</Text>
       </View>
 
@@ -91,7 +90,7 @@ const Login = () => {
 
         <View style={s.registerContainer}>
           <Text style={s.registerText}>Não tem conta? </Text>
-          <Pressable onPress={() => navigation.navigate('Register')}>
+          <Pressable onPress={() => navigation.navigate('/(auth)/register')}>
             <Text style={[s.registerText, s.registerLink]}>Cadastrar-se</Text>
           </Pressable>
         </View>
@@ -100,7 +99,7 @@ const Login = () => {
     </View>
   );
 };
-const s = StyleSheet.create({
+export const s = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',

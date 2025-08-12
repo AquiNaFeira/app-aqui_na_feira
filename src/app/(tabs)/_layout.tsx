@@ -7,10 +7,10 @@ import { colors } from "@/styles/theme";
 
 import  ProtectedRoute  from "@/components/ProtectedRoute";
 
-import Home from "@/app/( tabs )/home";
-import Perfil from "@/app/( tabs )/perfil";
-import Favoritos from "@/app/( tabs )/favorites";
-import Notificacao from "@/app/( tabs )/notifications";
+import Home from "@/app/(tabs)/home";
+import Perfil from "@/app/(tabs)/perfil";
+import Favoritos from "@/app/(tabs)/favorites";
+import Notificacao from "@/app/(tabs)/notifications";
 
 const Tabs = createBottomTabNavigator();
 
