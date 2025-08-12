@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { useSegments, useRouter } from "expo-router";
-import { s } from "@/components/bancoBottomSheet/style";
+
+import { authService } from "@/services/authService"; 
 
 type User = {
   id: string;

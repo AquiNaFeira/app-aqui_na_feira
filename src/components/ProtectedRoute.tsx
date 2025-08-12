@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { ActivityIndicator } from "react-native";
 import { Redirect } from "expo-router";
 import { useAuth } from "@/hooks/useAuth";
