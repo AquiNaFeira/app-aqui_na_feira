@@ -53,12 +53,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (!loading) {
       const isSignedIn = !!user;
-      const isAuthRoute = segments[0] === "( auth )";
+      const isAuthRoute = segments[0] === "(auth)";
 
       if (isSignedIn && isAuthRoute) {
-        router.replace("/( tabs )/home");
+        router.replace("/(tabs)/home");
       } else if (!isSignedIn && !isAuthRoute) {
-        router.replace("/( auth )/login");
+        router.replace("/(auth)/login");
       }
     }
   } , [loading, user, segments]);

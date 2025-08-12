@@ -5,10 +5,10 @@ import { View, Text } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient'; 
 import { colors } from "@/styles/theme";
 
-import Home from "@/app/( tabs )/home";
-import Perfil from "@/app/( tabs )/perfil";
-import Favoritos from "@/app/( tabs )/favorites";
-import Notificacao from "@/app/( tabs )/notifications";
+import Home from "@/app/(tabs)/home";
+import Perfil from "@/app/(tabs)/perfil";
+import Favoritos from "@/app/(tabs)/favorites";
+import Notificacao from "@/app/(tabs)/notifications";
 
 const Tabs = createBottomTabNavigator();
 

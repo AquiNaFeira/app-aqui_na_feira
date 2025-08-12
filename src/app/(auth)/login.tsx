@@ -90,7 +90,7 @@ const Login = () => {
 
         <View style={s.registerContainer}>
           <Text style={s.registerText}>Não tem conta? </Text>
-          <Pressable onPress={() => navigation.navigate('/( auth )/register')}>
+          <Pressable onPress={() => navigation.navigate('/(auth)/register')}>
             <Text style={[s.registerText, s.registerLink]}>Cadastrar-se</Text>
           </Pressable>
         </View>
