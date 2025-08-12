@@ -41,14 +41,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const logout = async () => {
     setLoading(true);
-    console.log("Saindo...");
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    setUser(null);
-    setToken(null);
-    setLoading(false);
-  };
+    try {
+        await authService.logout();
+        setUser(null);
+        setToken(null);
+    } catch (error) {
+        console.error("Erro no logout:", error);
+    } finally {
+        setLoading(false);
+    }
+};
 
   useEffect(() => {
     if (!loading) {
@@ -63,16 +65,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   } , [loading, user, segments]);
 
-  useEffect (() => {
+  useEffect(() => {
     const checkInitialAuth = async () => {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const storedUser = await authService.getStoredUser();
+            const storedToken = await authService.getStoredToken();
 
-      setUser(null);
-      setToken(null);
-      setLoading(false);
+            if (storedUser && storedToken) {
+                setUser(storedUser);
+                setToken(storedToken);
+            }
+        } catch (error) {
+            console.error("Erro ao verificar autenticação inicial:", error);
+        } finally {
+            setLoading(false);
+        }
     };
     checkInitialAuth();
-  }, []);
+}, []);
 
   return (
     <AuthContext.Provider value={{ user, token, loading, login, logout }}>
