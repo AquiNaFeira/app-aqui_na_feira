@@ -15,7 +15,7 @@ type AuthContextType = {
   logout: () => Promise<void>;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -56,7 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const isAuthRoute = segments[0] === "( auth )";
 
       if (isSignedIn && isAuthRoute) {
-        router.replace("/( tabs )");
+        router.replace("/( tabs )/home");
       } else if (!isSignedIn && !isAuthRoute) {
         router.replace("/( auth )/login");
       }
