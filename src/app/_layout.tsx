@@ -1,42 +1,60 @@
-import { Stack } from "expo-router"
+import React from "react";
+import { Stack } from "expo-router";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { AuthProvider } from '../hooks/useAuth';
 
+import { AuthProvider, useAuth } from '../hooks/useAuth'; 
 
 import {
-    useFonts,
+  useFonts,
+  Lexend_600SemiBold,
+  Lexend_400Regular,
+  Lexend_500Medium,
+  Lexend_700Bold
+} from "@expo-google-fonts/lexend";
+
+import { Loading } from "@/components/loading";
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
     Lexend_600SemiBold,
     Lexend_400Regular,
     Lexend_500Medium,
     Lexend_700Bold
-} from "@expo-google-fonts/lexend"
+  });
 
-import { Loading } from "@/components/loading"
+  if (!fontsLoaded) {
+    return <Loading />;
+  }
 
-export default function Layout(){
-    const [fontsLoaded] = useFonts({
-        Lexend_600SemiBold,
-        Lexend_400Regular,
-        Lexend_500Medium,
-        Lexend_700Bold
-    })
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider>
+        <AuthProvider>
+          <AuthNavigator />
+        </AuthProvider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
+  );
+}
 
-    if(!fontsLoaded){
-        return <Loading />
+function AuthNavigator() {
+    const { isLoadingAuth, user } = useAuth();
+
+    if (isLoadingAuth) {
+        return <Loading />;
     }
 
-    return (
-        <GestureHandlerRootView style={{flex: 1}} >
-            <BottomSheetModalProvider>
-                <AuthProvider>
-                    <Stack>
-                        <Stack.Screen name="index" options={{ headerShown: false }} />
-                        <Stack.Screen name="( auth )" options={{ headerShown: false }} />
-                        <Stack.Screen name="( tabs )" options={{ headerShown: false }} />
-                    </Stack>
-                </AuthProvider>
-            </BottomSheetModalProvider>
-        </GestureHandlerRootView>
-    );
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      {!user ? (
+        <>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        </>
+      ) : (
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      )}
+    </Stack>
+  );
 }

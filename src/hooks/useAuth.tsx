@@ -10,7 +10,7 @@ type User = {
 type AuthContextType = {
   user: User | null;
   token: string | null;
-  loading: boolean;
+  isLoadingAuth: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
@@ -20,7 +20,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoadingAuth, setLoading] = useState(true);
   
   const segments = useSegments();
   const router = useRouter();
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 };
 
   useEffect(() => {
-    if (!loading) {
+    if (!isLoadingAuth) {
       const isSignedIn = !!user;
       const isAuthRoute = segments[0] === "(auth)";
 
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         router.replace("/(auth)/login");
       }
     }
-  } , [loading, user, segments]);
+  } , [isLoadingAuth, user, segments]);
 
   useEffect(() => {
     const checkInitialAuth = async () => {
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 }, []);
 
   return (
-    <AuthContext.Provider value={{ user, token, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, token, isLoadingAuth, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
