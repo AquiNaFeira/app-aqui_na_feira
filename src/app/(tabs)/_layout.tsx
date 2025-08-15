@@ -1,37 +1,70 @@
-import { s } from "@/components/navigationBar/style";
-import { Home as HomeIcon, Heart, Bell, User } from "lucide-react-native"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient'; 
-import { colors } from "@/styles/theme";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Tabs } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Home as HomeIcon, Heart, Bell, User } from 'lucide-react-native';
+import { colors } from '@/styles/theme';
+import ProtectedRoute from "@/components/ProtectedRoute";
 
-import  ProtectedRoute  from "@/components/ProtectedRoute";
 
-import Home from "@/app/(tabs)/home";
-import Perfil from "@/app/(tabs)/perfil";
-import Favoritos from "@/app/(tabs)/favorites";
-import Notificacao from "@/app/(tabs)/notifications";
+export const s = StyleSheet.create({
+  tabBar: {
+    height: 70,
+    backgroundColor: colors.white.base,
+    borderTopWidth: 0,
+    elevation: 0,
+    shadowColor: 'transparent',
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 8,
+  },
+  label: {
+    fontSize: 12,
+    marginTop: 4,
+    color: colors.green.base,
+    fontFamily: 'Lexend_400Regular',
+  },
+  focusedLabel: {
+    color: colors.green.base,
+    fontFamily: 'Lexend_600SemiBold',
+  },
+  iconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconFocusedContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
-const Tabs = createBottomTabNavigator();
-
-export default function NavigationBar() {
+export default function TabLayout() {
   return (
     <ProtectedRoute>
-      <Tabs.Navigator
+      <Tabs
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: s.tabBar,
           tabBarItemStyle: {
-            justifyContent: "center",
-            alignItems: "center"
-          }
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
         }}
       >
         <Tabs.Screen
-          name="Home"
-          component={Home}
+          name="home"
           options={{
+            title: 'Home',
             tabBarIcon: ({ focused }) => (
               <View style={s.tab}>
                 {focused ? (
@@ -41,11 +74,11 @@ export default function NavigationBar() {
                     end={{ x: 1, y: 1 }}
                     style={s.iconFocusedContainer}
                   >
-                    <HomeIcon size={24} color={colors.white.base}/>
+                    <HomeIcon size={24} color={colors.white.base} />
                   </LinearGradient>
                 ) : (
                   <View style={s.iconContainer}>
-                    <HomeIcon size={24} color={colors.green.base}/>
+                    <HomeIcon size={24} color={colors.green.base} />
                   </View>
                 )}
                 <Text style={[s.label, focused && s.focusedLabel]}>Home</Text>
@@ -53,11 +86,10 @@ export default function NavigationBar() {
             ),
           }}
         />
-
         <Tabs.Screen
-          name="Favoritos"
-          component={Favoritos}
+          name="favorites"
           options={{
+            title: 'Favoritos',
             tabBarIcon: ({ focused }) => (
               <View style={s.tab}>
                 {focused ? (
@@ -67,11 +99,11 @@ export default function NavigationBar() {
                     end={{ x: 1, y: 1 }}
                     style={s.iconFocusedContainer}
                   >
-                    <Heart size={24} color={colors.white.base}/>
+                    <Heart size={24} color={colors.white.base} />
                   </LinearGradient>
                 ) : (
                   <View style={s.iconContainer}>
-                    <Heart size={24} color={colors.green.base}/>
+                    <Heart size={24} color={colors.green.base} />
                   </View>
                 )}
                 <Text style={[s.label, focused && s.focusedLabel]}>Favoritos</Text>
@@ -79,36 +111,10 @@ export default function NavigationBar() {
             ),
           }}
         />
-
         <Tabs.Screen
-          name="Notificacao"
-          component={Notificacao}
+          name="notifications"
           options={{
-            tabBarIcon: ({ focused }) => (
-              <View style={s.tab}>
-                {focused ? (
-                  <LinearGradient
-                    colors={['#4EAF57', '#285D35']}
-                    end={{ x: 1, y: 1 }}
-                    style={s.iconFocusedContainer}
-                  >
-                    <Bell size={24} color={colors.white.base}/>
-                  </LinearGradient>
-                ) : (
-                  <View style={s.iconContainer}>
-                    <Bell size={24} color={colors.green.base}/>
-                  </View>
-                )}
-                <Text style={[s.label, focused && s.focusedLabel]}>Notificação</Text>
-              </View>
-            ),
-          }}
-        />
-
-        <Tabs.Screen
-          name="Perfil"
-          component={Perfil}
-          options={{
+            title: 'Notificação',
             tabBarIcon: ({ focused }) => (
               <View style={s.tab}>
                 {focused ? (
@@ -118,11 +124,36 @@ export default function NavigationBar() {
                     end={{ x: 1, y: 1 }}
                     style={s.iconFocusedContainer}
                   >
-                    <User size={24} color={colors.white.base}/>
+                    <Bell size={24} color={colors.white.base} />
                   </LinearGradient>
                 ) : (
                   <View style={s.iconContainer}>
-                    <User size={24} color={colors.green.base}/>
+                    <Bell size={24} color={colors.green.base} />
+                  </View>
+                )}
+                <Text style={[s.label, focused && s.focusedLabel]}>Notificação</Text>
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="perfil"
+          options={{
+            title: 'Perfil',
+            tabBarIcon: ({ focused }) => (
+              <View style={s.tab}>
+                {focused ? (
+                  <LinearGradient
+                    colors={['#4EAF57', '#285D35']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={s.iconFocusedContainer}
+                  >
+                    <User size={24} color={colors.white.base} />
+                  </LinearGradient>
+                ) : (
+                  <View style={s.iconContainer}>
+                    <User size={24} color={colors.green.base} />
                   </View>
                 )}
                 <Text style={[s.label, focused && s.focusedLabel]}>Perfil</Text>
@@ -130,7 +161,7 @@ export default function NavigationBar() {
             ),
           }}
         />
-      </Tabs.Navigator>
+      </Tabs>
     </ProtectedRoute>
   );
 }

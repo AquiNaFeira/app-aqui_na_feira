@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const { login, loading } = useAuth(); 
+  const { login, isLoadingAuth } = useAuth(); 
 
   const handleLogin = async () => {
     try {
