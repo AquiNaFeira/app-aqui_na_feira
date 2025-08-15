@@ -1,5 +1,5 @@
-import React from "react";
-import { Stack } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Stack, SplashScreen } from "expo-router";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
@@ -14,6 +14,7 @@ import {
 } from "@expo-google-fonts/lexend";
 
 import { Loading } from "@/components/loading";
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -23,28 +24,31 @@ export default function RootLayout() {
     Lexend_700Bold
   });
 
-  if (!fontsLoaded) {
-    return <Loading />;
-  }
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <BottomSheetModalProvider>
         <AuthProvider>
-          <AuthNavigator />
+          <LayoutStack fontsLoaded={fontsLoaded} />
         </AuthProvider>
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   );
 }
 
-function AuthNavigator() {
-    const { isLoadingAuth, user } = useAuth();
+function LayoutStack({ fontsLoaded }: { fontsLoaded: boolean }) {
+  const { isLoadingAuth, user } = useAuth();
+  const [isAppReady, setIsAppReady] = useState(false);
 
-    if (isLoadingAuth) {
-        return <Loading />;
+  useEffect(() => {
+    if (fontsLoaded && !isLoadingAuth) {
+      SplashScreen.hideAsync();
+      setIsAppReady(true);
     }
-
+  }, [fontsLoaded, isLoadingAuth]);
+  if (!isAppReady) {
+    return null;
+  }
+  
   return (
     <Stack screenOptions={{ headerShown: false }}>
       {!user ? (
