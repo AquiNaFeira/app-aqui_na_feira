@@ -7,7 +7,6 @@ interface LoginData {
 }
 
 interface RegisterData {
-  name: string;
   email: string;
   password: string;
 }
@@ -43,22 +42,26 @@ export const authService = {
     }
   },
 
-
   async register(data: RegisterData): Promise<AuthResponse> {
-    try {
-      const response = await api.post('/auth/register', data);
-      const { user, token } = response.data;
-      
-      await AsyncStorage.setItem(TOKEN_KEY, token);
-      await AsyncStorage.setItem(USER_KEY, JSON.stringify(user));
+        console.log("Simulando cadastro com os dados:", data);
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                const fakeUser: User = {
+                  id: 'fake-user-id-' + Math.random().toString(36).substring(7),
+                  email: data.email,
+                  name: ''
+                };
+                const fakeToken = 'fake-token-for-test-purpose-12345';
 
-      api.defaults.headers.Authorization = `Bearer ${token}`;
-      
-      return { user, token };
-    } catch (error) {
-      throw error;
-    }
-  },
+                console.log("Registro simulado com sucesso. Retornando dados fake.");
+
+             
+                resolve({ user: fakeUser, token: fakeToken });
+
+                
+            }, 2000);
+        });
+    },
 
   async logout(): Promise<void> {
     try {

@@ -1,4 +1,3 @@
-// src/app/(tabs)/_layout.tsx
 import { Home as HomeIcon, Heart, Bell, User } from "lucide-react-native";
 import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient'; 

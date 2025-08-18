@@ -5,12 +5,12 @@ type User = {
     id: string;
     email: string;
 }
-
 type AuthContextType = {
     user: User | null;
     token: string | null;
     loading: boolean;
     login: (email: string, password: string) => Promise<void>;
+    register: (email: string, password: string) => Promise<void>; // NOVO
     logout: () => Promise<void>;
 };
 
@@ -35,6 +35,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
+    const register = async (email: string, password: string) => {
+        setLoading(true);
+        try {
+            const { user, token } = await authService.register({ email, password });
+            setUser(user);
+            setToken(token);
+        } catch (error: any) {
+            console.error("Erro no registro:", error);
+            throw new Error("Ocorreu um erro ao tentar se cadastrar. Tente novamente.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const logout = async () => {
         setLoading(true);
         try {
@@ -47,6 +61,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             setLoading(false);
         }
     };
+
     useEffect(() => {
         const checkInitialAuth = async () => {
             try {
@@ -67,7 +82,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, token, loading, login, logout }}>
+        <AuthContext.Provider value={{ user, token, loading, login, register, logout }}>
             {children}
         </AuthContext.Provider>
     );

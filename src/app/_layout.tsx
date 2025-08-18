@@ -1,40 +1,51 @@
-import { Stack } from "expo-router"
+import React, { useEffect, useState } from 'react';
+import { Stack, SplashScreen } from "expo-router";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { AuthProvider } from '../hooks/useAuth';
 
 
+SplashScreen.preventAutoHideAsync();
+
+import { AuthProvider, useAuth } from '../hooks/useAuth';
 import {
     useFonts,
     Lexend_600SemiBold,
     Lexend_400Regular,
     Lexend_500Medium,
     Lexend_700Bold
-} from "@expo-google-fonts/lexend"
+} from "@expo-google-fonts/lexend";
 
-import { Loading } from "@/components/loading"
-
-export default function Layout(){
+function InitialLoader() {
     const [fontsLoaded] = useFonts({
         Lexend_600SemiBold,
         Lexend_400Regular,
         Lexend_500Medium,
         Lexend_700Bold
-    })
-
-    if(!fontsLoaded){
-        return <Loading />
+    });
+    const { loading } = useAuth();
+    useEffect(() => {
+        if (fontsLoaded && !loading) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontsLoaded, loading]);
+    if (!fontsLoaded || loading) {
+        return null;
     }
-
     return (
-        <GestureHandlerRootView style={{flex: 1}} >
+        <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack>
+    );
+}
+
+export default function RootLayout() {
+    return (
+        <GestureHandlerRootView style={{ flex: 1 }}>
             <BottomSheetModalProvider>
                 <AuthProvider>
-                    <Stack>
-                        <Stack.Screen name="index" options={{ headerShown: false }} />
-                        <Stack.Screen name="( auth )" options={{ headerShown: false }} />
-                        <Stack.Screen name="( tabs )" options={{ headerShown: false }} />
-                    </Stack>
+                    <InitialLoader />
                 </AuthProvider>
             </BottomSheetModalProvider>
         </GestureHandlerRootView>
