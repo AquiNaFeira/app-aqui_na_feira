@@ -1,5 +1,3 @@
-import { green } from "react-native-reanimated/lib/typescript/Colors";
-
 export const colors = {
   green: {
     base: "#285D35",

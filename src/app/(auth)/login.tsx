@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Pressable, ScrollView, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Pressable, ScrollView, StyleSheet, StatusBar } from 'react-native';
 import { Alert } from 'react-native';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'expo-router';
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react-native';
+import { ArrowLeft } from 'lucide-react-native';
+import Input from '@/components/input';
+import Button from '@/components/button';
+import { fontFamily } from '@/styles/font-family';
 
 const primaryColor = "#285D35";
 const router = useRouter();
@@ -13,7 +16,6 @@ const Login = () => {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const { login, loading } = useAuth(); 
 
@@ -44,29 +46,21 @@ const Login = () => {
         </View>
 
         <View style={s.formContainer}>
-          <Text style={s.label}>Email</Text>
-          <TextInput
-            style={s.input}
-            placeholder="Exemplo@gmail.com"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
+          <Input
+          label='Email'
+          placeholder='Exemplo@gmail.com'
+          value={email}
+          onChangeText={setEmail}
+          type='email'
           />
 
-          <Text style={s.label}>Senha</Text>
-          <View style={s.passwordContainer}>
-            <TextInput
-              style={s.inputPassword}
-              placeholder="************"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-            />
-            <Pressable onPress={() => setShowPassword(!showPassword)} style={s.eyeIcon}>
-              {showPassword ? <Eye size={20} color="#666" /> : <EyeOff size={20} color="#666" />}
-            </Pressable>
-          </View>
+          <Input
+          label='Senha'
+          placeholder='*****'
+          value={password}
+          onChangeText={setPassword}
+          type='password'
+          />
         </View>
         
         <View style={s.optionsContainer}>
@@ -81,20 +75,18 @@ const Login = () => {
           </Pressable>
         </View>
 
-        <Pressable
-          style={[s.button, { backgroundColor: primaryColor }]}
-          onPress={handleLogin}
-        >
-          <Text style={s.buttonText}>Entrar</Text>
-        </Pressable>
+        <Button 
+            title="Entrar" 
+            style={[s.button]}
+            onPress={handleLogin}
+        />
 
         <View style={s.registerContainer}>
           <Text style={s.registerText}>Não tem conta? </Text>
           <Pressable onPress={() => navigation.navigate('/(auth)/register')}>
             <Text style={[s.registerText, s.registerLink]}>Cadastrar-se</Text>
           </Pressable>
-        </View>
-        
+        </View>  
       </ScrollView>
     </View>
   );
@@ -102,7 +94,7 @@ const Login = () => {
 export const s = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff'
   },
   header: {
     flexDirection: 'row',
@@ -143,43 +135,6 @@ export const s = StyleSheet.create({
     width: '100%',
     marginBottom: 20,
   },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-  },
-  input: {
-    width: '100%',
-    height: 50,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    fontSize: 16,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  passwordContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    height: 50,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    marginBottom: 20,
-  },
-  inputPassword: {
-    flex: 1,
-    height: 50,
-    fontSize: 16,
-  },
-  eyeIcon: {
-    paddingLeft: 10,
-  },
   optionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -217,17 +172,7 @@ export const s = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    width: '100%',
-    height: 55,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
     marginBottom: 20,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
   },
   registerContainer: {
     flexDirection: 'row',

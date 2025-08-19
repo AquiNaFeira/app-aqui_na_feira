@@ -11,12 +11,6 @@ export const s = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 15,
         borderRadius: 10,
-        gap: 12,
-        elevation: 3,
-        shadowColor: colors.green.light,
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.3,
-        shadowRadius: 6,
     },
     title: {
         fontFamily: fontFamily.semiBold,

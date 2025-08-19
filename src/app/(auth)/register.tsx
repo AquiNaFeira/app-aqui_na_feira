@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, StatusBar, TextInput, Pressable, ScrollView, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Pressable, ScrollView, Alert, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
-import { Eye, EyeOff } from 'lucide-react-native';
 import { useAuth } from '@/hooks/useAuth';
 import Button from '@/components/button';
 import { colors, fontFamily } from '@/styles/theme';
+import Input from '@/components/input';
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [terms, setTerms] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    
     const { register } = useAuth();
 
     const handleRegister = async () => {
@@ -55,46 +52,29 @@ export default function Register() {
                 </View>
 
                 <View style={s.formContainer}>
-                    <Text style={s.label}>Email</Text>
-                    <TextInput
-                        style={s.input}
-                        placeholder="exemplo@gmail.com"
-                        placeholderTextColor={colors.gray.base}
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
+                    <Input
+                    label='Email'
+                    placeholder='exemplo@gmail.com'
+                    value={email}
+                    onChangeText={setEmail}
+                    type='email'
                     />
 
-                    <Text style={s.label}>Senha</Text>
-                    <View style={s.passwordContainer}>
-                        <TextInput
-                            style={s.inputPassword}
-                            placeholder=""
-                            placeholderTextColor={colors.gray.base}
-                            value={password}
-                            onChangeText={setPassword}
-                            secureTextEntry={!showPassword}
-                        />
-                        <Pressable onPress={() => setShowPassword(!showPassword)} style={s.eyeIcon}>
-                            {showPassword ? <Eye size={20} color={colors.green.light} /> : <EyeOff size={20} color={colors.green.light} />}
-                        </Pressable>
-                    </View>
+                    <Input
+                    label='Senha'
+                    placeholder='*****'
+                    value={password}
+                    onChangeText={setPassword}
+                    type='password'
+                    />
 
-                    <Text style={s.label}>Confirmar Senha</Text>
-                    <View style={s.passwordContainer}>
-                        <TextInput
-                            style={s.inputPassword}
-                            placeholder=""
-                            placeholderTextColor={colors.gray.base[30]}
-                            value={passwordConfirm}
-                            onChangeText={setPasswordConfirm}
-                            secureTextEntry={!showConfirmPassword}
-                        />
-                        <Pressable onPress={() => setShowConfirmPassword(!showConfirmPassword)} style={s.eyeIcon}>
-                            {showConfirmPassword ? <Eye size={20} color={colors.green.light} /> : <EyeOff size={20} color={colors.green.light} />}
-                        </Pressable>
-                    </View>
+                    <Input
+                    label='Confirmar a senha'
+                    placeholder='*****'
+                    value={passwordConfirm}
+                    onChangeText={setPasswordConfirm}
+                    type='password'
+                    />
                 </View>
                 
                 <View style={s.termsContainer}>
@@ -111,12 +91,15 @@ export default function Register() {
                 <Button 
                     title="Próximo"
                     icon={loading ? <ActivityIndicator color={colors.white.base} /> : undefined}
+                    style={[s.button]}
                     onPress={handleRegister}
                     disabled={loading}
                 />
 
                 <Button
                     title="Cancelar"
+                    style={[s.button, s.cancelButton]}
+                    textStyle={{color: colors.green.base}}
                     onPress={() => router.back()}
                 />
 
@@ -152,53 +135,12 @@ export const s = StyleSheet.create({
     },
     subtitle: {
         fontSize: 15,
-        color: colors.gray.base,
+        color: colors.black.base,
         marginTop: 5,
     },
     formContainer: {
         width: '100%',
         marginBottom: 20,
-    },
-    label: {
-        fontSize: 16,
-        fontFamily: fontFamily.semiBold,
-        color: colors.black.base,
-        marginBottom: 8,
-    },
-    input: {
-        width: '100%',
-        height: 50,
-        backgroundColor: colors.gray.base,
-        borderRadius: 8,
-        paddingHorizontal: 15,
-        fontSize: 16,
-        marginBottom: 20,
-        borderWidth: 1,
-        borderColor: colors.gray.base,
-        fontFamily: fontFamily.regular,
-    },
-    passwordContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100%',
-        height: 50,
-        backgroundColor: colors.gray.base,
-        borderRadius: 8,
-        paddingLeft: 15,
-        paddingRight: 10,
-        borderWidth: 1,
-        borderColor: colors.gray.base,
-        marginBottom: 20,
-    },
-    inputPassword: {
-        flex: 1,
-        height: 50,
-        fontSize: 16,
-        fontFamily: fontFamily.regular,
-    },
-    eyeIcon: {
-        paddingLeft: 10,
     },
     termsContainer: {
         flexDirection: 'row',
@@ -215,7 +157,7 @@ export const s = StyleSheet.create({
         height: 20,
         borderRadius: 5,
         borderWidth: 1.5,
-        borderColor: colors.gray.base,
+        borderColor: colors.black.base,
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 10,
@@ -230,15 +172,21 @@ export const s = StyleSheet.create({
     },
     termText: {
         fontSize: 12,
-        color: colors.gray.base,
+        color: colors.black.base,
         flexShrink: 1,
+        textAlign: 'center'
     },
     underlineText: {
-        color: colors.green.base,
+        color: colors.green.light,
         textDecorationLine: 'underline',
     },
     button: {
         marginBottom: 10,
+    },
+    cancelButton: {
+        backgroundColor: colors.white.base,
+        borderWidth: 1,
+        borderColor: colors.black.base,
     },
     loginContainer: {
         flexDirection: 'row',
@@ -248,7 +196,7 @@ export const s = StyleSheet.create({
     },
     loginText: {
         fontSize: 14,
-        color: colors.gray.base,
+        color: colors.black.base,
     },
     loginLink: {
         color: colors.green.base,
