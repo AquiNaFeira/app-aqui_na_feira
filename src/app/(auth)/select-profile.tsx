@@ -4,6 +4,8 @@ import { useRouter } from 'expo-router';
 import { ShoppingBag, Store } from 'lucide-react-native'; 
 import { colors, fontFamily } from '@/styles/theme';
 
+import Logo from '@/components/logo';
+
 type ProfileType = 'client' | 'vendor'; // 'vendor' é o termo técnico para feirante
 
 const SelectProfileScreen = () => {
@@ -24,8 +26,7 @@ const SelectProfileScreen = () => {
 
     return (
         <View style={s.container}>
-            <View style={s.header}>
-            </View>
+            <Logo />
             <View style={s.cardContainer}>
                 <Text style={s.title}>
                     Selecione o seu tipo de <Text style={s.highlightedText}>Perfil</Text>
