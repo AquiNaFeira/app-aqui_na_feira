@@ -23,12 +23,6 @@ export default function AuthLayout() {
             title: 'Cadastro',
           }}
         />
-        <Stack.Screen 
-          name="forgot-password" 
-          options={{
-            title: 'Recuperar Senha',
-          }}
-        />
       </Stack>
     </>
   );

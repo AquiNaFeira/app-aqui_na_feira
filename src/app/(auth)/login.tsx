@@ -26,7 +26,6 @@ const Login = () => {
       Alert.alert("Erro no Login", error.message || "Ocorreu um erro ao tentar fazer login. Verifique suas credenciais.");
     }
   };
-
   return (
     <View style={s.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -70,7 +69,7 @@ const Login = () => {
             </View>
             <Text style={s.optionsText}>Lembrar de mim</Text>
           </Pressable>
-          <Pressable onPress={() => {  }}>
+          <Pressable onPress={() => { navigation.navigate('/(modals)/forgot-password') }}>
             <Text style={[s.optionsText, s.forgotPasswordText]}>Esqueceu a senha?</Text>
           </Pressable>
         </View>

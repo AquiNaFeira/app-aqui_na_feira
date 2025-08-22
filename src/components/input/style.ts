@@ -32,8 +32,9 @@ export const s = StyleSheet.create({
   input: {
     flex: 1,
     height: '100%',
-    fontSize: 16,
+    fontSize: 14,
     color: '#333',
+    fontFamily: fontFamily.regular
   },
   inputPassword: {
     paddingRight: 10,
