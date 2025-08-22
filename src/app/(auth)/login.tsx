@@ -6,7 +6,7 @@ import { useRouter } from 'expo-router';
 import { ArrowLeft } from 'lucide-react-native';
 import Input from '@/components/input';
 import Button from '@/components/button';
-import { fontFamily } from '@/styles/font-family';
+import ForgotPasswordPopup from '@/components/popup';
 
 const primaryColor = "#285D35";
 const router = useRouter();
@@ -17,6 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [forgotPopUp, setforgotPopUp] = useState(false);
   const { login, loading } = useAuth(); 
 
   const handleLogin = async () => {
@@ -69,7 +70,7 @@ const Login = () => {
             </View>
             <Text style={s.optionsText}>Lembrar de mim</Text>
           </Pressable>
-          <Pressable onPress={() => { navigation.navigate('/(modals)/forgot-password') }}>
+          <Pressable onPress={() => {setforgotPopUp(true)}}>
             <Text style={[s.optionsText, s.forgotPasswordText]}>Esqueceu a senha?</Text>
           </Pressable>
         </View>
@@ -87,6 +88,7 @@ const Login = () => {
           </Pressable>
         </View>  
       </ScrollView>
+      <ForgotPasswordPopup visible={forgotPopUp} onClose={() => setforgotPopUp(false)}/>
     </View>
   );
 };
