@@ -90,7 +90,7 @@ export default function VerifyCodeScreen() {
                 </View>
 
                 <Button
-                    title="Cadastrar Nova Senha"
+                    title="Confirmar Código"
                     onPress={handleVerifyCode}
                     icon={loading ? <ActivityIndicator color={colors.white.base} /> : undefined}
                     disabled={loading || resendLoading}

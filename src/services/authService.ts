@@ -36,7 +36,7 @@ async function requestPasswordReset(email: string): Promise<RequestPasswordReset
     console.log(`Simulando solicitação de recuperação para o e-mail: ${email}`);
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (email === "sidere@aquianafeira.com") {
+            if (email === "teste@teste.com") {
                 const fakeRecoveryId = `rec_id_${Math.random().toString(36).substring(2, 9)}`;
                 console.log(`Simulação de sucesso. Recovery ID: ${fakeRecoveryId}`);
                 resolve({ recoveryId: fakeRecoveryId });
