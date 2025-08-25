@@ -2,10 +2,13 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import { colors } from "@/styles/theme";
 import { useState } from "react";
-import { View, Text, Modal, Pressable } from "react-native";
+import { View, Text, Modal, Pressable, Alert } from "react-native";
 import { KeyRound, Lock, Mail } from 'lucide-react-native';
 import { BlurView } from 'expo-blur';
 import { s } from "./style";
+import { useRouter } from "expo-router";
+import { authService } from "@/services/authService";
+
 
 interface ModalProps {
   visible: boolean;
@@ -15,12 +18,29 @@ interface ModalProps {
 type ModalStep = 'send-email' | 'select-method';
 
 export default function ForgotPasswordPopup({visible, onClose}: ModalProps) {
+    const [recoveryId, setRecoveryId] = useState<string | null>(null);
+    const router = useRouter();
     const [email, setEmail] = useState('');
     const [currentStep, setCurrentStep] = useState<ModalStep>('send-email');
+    const [loading, setLoading] = useState(false);
 
-    const handleSubmitEmail = () => {
-      console.log('Email de Recuperação:', email)
-      setCurrentStep('select-method');
+   const handleSubmitEmail = async () => {
+        if (!email) {
+            Alert.alert("Erro", "Por favor, digite seu e-mail.");
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await authService.requestPasswordReset(email);
+            setRecoveryId(response.recoveryId);
+            setCurrentStep('select-method');
+        } catch (error: any) {
+            console.error('Erro ao enviar e-mail:', error);
+            Alert.alert("Erro", error.message || "Não foi possível enviar o e-mail. Por favor, verifique-o e tente novamente.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleClose = () => {
@@ -30,9 +50,25 @@ export default function ForgotPasswordPopup({visible, onClose}: ModalProps) {
     };
 
     const handleMethodSelected = (method: 'code' | 'answer') => {
-        console.log(method)
-        handleClose()
-    }
+        if (!recoveryId) {
+            Alert.alert("Erro", "Ocorreu um erro. Por favor, tente novamente.");
+            return;
+        }
+
+    handleClose();
+
+    if (method === 'code') {
+            router.push({
+                pathname: '/(auth)/verify-code',
+                params: { recoveryId: recoveryId, email: email },
+            });
+        } else if (method === 'answer') {
+            router.push({
+                pathname: '/(auth)/verify-answer',
+                params: { recoveryId: recoveryId, email: email },
+            });
+        }
+    };
 
     const renderEmailStep = () => {
       return(

@@ -25,6 +25,59 @@ interface AuthResponse {
 const TOKEN_KEY = '@auth_token';
 const USER_KEY = '@auth_user';
 
+interface RequestPasswordResetResponse {
+    recoveryId: string;
+}
+interface VerifyCodeResponse {
+    recoveryToken: string;
+}
+
+async function requestPasswordReset(email: string): Promise<RequestPasswordResetResponse> {
+    console.log(`Simulando solicitação de recuperação para o e-mail: ${email}`);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (email === "sidere@aquianafeira.com") {
+                const fakeRecoveryId = `rec_id_${Math.random().toString(36).substring(2, 9)}`;
+                console.log(`Simulação de sucesso. Recovery ID: ${fakeRecoveryId}`);
+                resolve({ recoveryId: fakeRecoveryId });
+            } else {
+                console.log("Simulação de erro: E-mail não encontrado.");
+                reject(new Error("E-mail não encontrado."));
+            }
+        }, 1500);     });
+}
+
+async function verifyCode(recoveryId: string, code: string): Promise<VerifyCodeResponse> {
+    console.log(`Simulando verificação para recoveryId: ${recoveryId} e código: ${code}`);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (code === "123456") {
+                const fakeRecoveryToken = `rec_token_${Math.random().toString(36).substring(2, 9)}`;
+                console.log(`Simulação de sucesso. Recovery Token: ${fakeRecoveryToken}`);
+                resolve({ recoveryToken: fakeRecoveryToken });
+            } else {
+                console.log("Simulação de erro: Código inválido.");
+                reject(new Error("Código inválido."));
+            }
+        }, 1500);
+    });
+}
+
+async function resendCode(email: string, recoveryId: string): Promise<void> {
+    console.log(`Simulando reenvio de código para o e-mail: ${email} e recoveryId: ${recoveryId}`);
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (recoveryId) {
+                console.log("Simulação de sucesso: Novo código enviado.");
+                resolve();
+            } else {
+                console.log("Simulação de erro: ID de recuperação inválido.");
+                reject(new Error("ID de recuperação inválido ou expirado."));
+            }
+        }, 1500); 
+    });
+}
+
 export const authService = {
     async login(data: LoginData): Promise<AuthResponse> {
         try {
@@ -132,5 +185,9 @@ export const authService = {
     } catch (error) {
       console.error('Erro ao atualizar usuário:', error);
     }
-  }
+  },
+  
+  requestPasswordReset,
+  verifyCode,
+  resendCode,
 };
